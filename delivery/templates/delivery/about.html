@@ -1,0 +1,106 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FoodFiesta | About</title>
+
+    <link rel="stylesheet"
+          href="{% static 'delivery/style.css' %}">
+
+</head>
+
+<body>
+
+{% include 'delivery/_navbar.html' %}
+
+
+<main class="restaurant-section">
+
+    <div class="page-heading">
+
+        <div class="eyebrow">
+            ABOUT FOODFIESTA
+        </div>
+
+        <h1>
+            Good food, made easier.
+        </h1>
+
+        <p>
+            FoodFiesta is a Django-based food delivery platform
+            where customers can discover restaurants, explore
+            menus, add dishes to their cart and place orders.
+        </p>
+
+    </div>
+
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🍽️
+            </div>
+
+            <h3>
+                Discover Restaurants
+            </h3>
+
+            <p>
+                Browse restaurants and explore different cuisines
+                available on FoodFiesta.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🛒
+            </div>
+
+            <h3>
+                Easy Ordering
+            </h3>
+
+            <p>
+                Explore restaurant menus, add your favourite dishes
+                to the cart and place an order.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                📦
+            </div>
+
+            <h3>
+                Track Orders
+            </h3>
+
+            <p>
+                Customers can view their order history and
+                keep track of previous orders.
+            </p>
+
+        </div>
+
+    </div>
+
+</main>
+
+</body>
+</html>

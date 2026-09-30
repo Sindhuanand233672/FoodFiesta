@@ -1,0 +1,125 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FoodFiesta | Menu</title>
+
+    <link rel="stylesheet"
+          href="{% static 'delivery/style.css' %}">
+
+</head>
+
+<body>
+
+{% include 'delivery/_navbar.html' %}
+
+
+<main class="restaurant-section">
+
+    <div class="page-heading">
+
+        <div class="eyebrow">
+            FOODFIESTA MENU
+        </div>
+
+        <h1>
+            Explore Food
+        </h1>
+
+        <p>
+            Browse dishes available across FoodFiesta restaurants.
+        </p>
+
+    </div>
+
+
+    {% if itemList %}
+
+    <div class="menu-grid">
+
+        {% for item in itemList %}
+
+        <div class="menu-card">
+
+            <img
+                src="{{ item.picture }}"
+                alt="{{ item.name }}"
+                class="menu-image"
+            >
+
+            <div class="menu-content">
+                <form
+    method="POST"
+    action="{% url 'add_to_cart' item.id %}"
+>
+    {% csrf_token %}
+
+    <button type="submit" class="customer-menu-button">
+        🛒 Add to Cart
+    </button>
+</form>
+
+                <h3>
+                    {{ item.name }}
+                </h3>
+
+                <p class="menu-description">
+                    {{ item.description }}
+                </p>
+
+                <p>
+                    <strong>{{ item.restaurant.name }}</strong>
+                </p>
+
+                <div class="menu-price">
+                    ₹{{ item.price }}
+                </div>
+
+                {% if item.vegetarian %}
+
+    <p class="menu-diet">
+        🟢 Vegetarian
+    </p>
+
+{% else %}
+
+    <p class="menu-diet">
+        🔴 Non-vegetarian
+    </p>
+
+{% endif %}
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="empty-state">
+
+        <h2>No menu items available</h2>
+
+        <p>
+            Food items will appear here once restaurants add their menus.
+        </p>
+
+    </div>
+
+    {% endif %}
+
+</main>
+
+</body>
+</html>

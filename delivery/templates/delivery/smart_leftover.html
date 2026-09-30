@@ -1,0 +1,238 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodFiesta | Smart Leftover Companion</title>
+    <link rel="stylesheet" href="{% static 'delivery/style.css' %}">
+
+    <style>
+        .leftover-page {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 24px;
+        }
+
+        .leftover-hero {
+            background: linear-gradient(135deg, #123d30, #24634b);
+            color: white;
+            padding: 40px;
+            border-radius: 22px;
+            margin-bottom: 30px;
+        }
+
+        .leftover-hero h1 {
+            font-size: clamp(28px, 4vw, 42px);
+            margin: 12px 0;
+        }
+
+        .leftover-hero p {
+            color: #e0eee7;
+            line-height: 1.7;
+        }
+
+        .leftover-form {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        .leftover-form input {
+            flex: 1;
+            min-width: 220px;
+            padding: 15px;
+            border: 1px solid #d7e2dc;
+            border-radius: 10px;
+            font-size: 15px;
+        }
+
+        .leftover-form button {
+            padding: 15px 24px;
+            border: none;
+            border-radius: 10px;
+            background: #f4c76b;
+            color: #183b2e;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .leftover-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-top: 22px;
+        }
+
+        .recipe-card {
+            background: white;
+            border: 1px solid #e4eae6;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 8px 25px rgba(20, 50, 35, 0.06);
+        }
+
+        .recipe-card h3 {
+            color: #174b38;
+            margin-top: 0;
+        }
+
+        .recipe-meta {
+            color: #68766e;
+            font-size: 14px;
+        }
+
+        .ingredient-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin: 12px 0 20px;
+        }
+
+        .ingredient-tag {
+            background: #eaf5ee;
+            color: #245d40;
+            border-radius: 20px;
+            padding: 6px 10px;
+            font-size: 13px;
+        }
+
+        .missing-tag {
+            background: #fff2df;
+            color: #87591c;
+        }
+
+        .recipe-card h4 {
+            margin-bottom: 8px;
+        }
+
+        .leftover-empty {
+            background: #f4f8f5;
+            padding: 28px;
+            border-radius: 14px;
+            color: #506257;
+            line-height: 1.7;
+        }
+
+        .leftover-back {
+            display: inline-block;
+            margin-top: 24px;
+            color: #24634b;
+            font-weight: 600;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+<main class="leftover-page">
+
+    <section class="leftover-hero">
+        <div>♻️ FOODFiesta SMART KITCHEN</div>
+
+        <h1>Cook something with what you have.</h1>
+
+        <p>
+            Enter the ingredients in your kitchen.
+            We'll suggest recipes and show you what's missing.
+        </p>
+
+        <form method="GET"
+            action="{% url 'smart_leftover_companion' %}"
+            class="leftover-form">
+
+            <input
+                type="text"
+                name="ingredients"
+                value="{{ ingredient_input }}"
+                placeholder="e.g. rice, tomato, onion"
+                required
+            >
+
+            <button type="submit">Find Recipes →</button>
+        </form>
+    </section>
+
+    {% if searched %}
+
+        <h2>Recipe suggestions</h2>
+
+        {% if matching_recipes %}
+
+            <p>
+                Found {{ matching_recipes|length }}
+                recipe{{ matching_recipes|length|pluralize }} for your ingredients.
+            </p>
+
+            <div class="leftover-grid">
+
+                {% for recipe in matching_recipes %}
+                    <article class="recipe-card">
+
+                        <h3>{{ recipe.name }}</h3>
+
+                        <p>{{ recipe.description }}</p>
+
+                        <p class="recipe-meta">
+                            ⏱ {{ recipe.time }}
+                            · {{ recipe.match_count }} matching
+                            ingredient{{ recipe.match_count|pluralize }}
+                        </p>
+
+                        <h4>You have</h4>
+                        <div class="ingredient-tags">
+                            {% for ingredient in recipe.matched %}
+                                <span class="ingredient-tag">
+                                    {{ ingredient|title }}
+                                </span>
+                            {% endfor %}
+                        </div>
+
+                        <h4>Still needed</h4>
+                        <div class="ingredient-tags">
+                            {% for ingredient in recipe.missing %}
+                                <span class="ingredient-tag missing-tag">
+                                    {{ ingredient|title }}
+                                </span>
+                            {% empty %}
+                                <span class="ingredient-tag">
+                                    You have everything!
+                                </span>
+                            {% endfor %}
+                        </div>
+
+                    </article>
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="leftover-empty">
+                <h3>No matching recipes found</h3>
+                Try common ingredients such as rice, tomato, onion,
+                potato, egg, paneer, banana or lemon.
+            </div>
+
+        {% endif %}
+
+    {% else %}
+
+        <div class="leftover-empty">
+            <strong>How it works</strong><br>
+            1. Enter ingredients separated by commas.<br>
+            2. Find recipes that use those ingredients.<br>
+            3. Check what you still need.
+        </div>
+
+    {% endif %}
+
+    <a href="{% url 'index' %}" class="leftover-back">
+        ← Back to FoodFiesta
+    </a>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,132 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FoodFiesta | {{ restaurant.name }}</title>
+
+    <link rel="stylesheet"
+          href="{% static 'delivery/style.css' %}">
+</head>
+
+<body>
+
+    {% include 'delivery/_navbar.html' %}
+
+    <main class="restaurant-section">
+
+        <!-- Restaurant Header -->
+        <div class="menu-header">
+
+            <div class="eyebrow">
+                RESTAURANT MENU
+            </div>
+
+            <h1>
+                {{ restaurant.name }}
+            </h1>
+
+            <p>
+                {{ restaurant.cuisine }}
+                &nbsp; • &nbsp;
+                ★ {{ restaurant.rating }}
+            </p>
+
+        </div>
+
+        <!-- Menu Items -->
+        {% if itemList %}
+
+            <div class="menu-grid">
+
+                {% for item in itemList %}
+
+                    <div class="menu-card">
+
+                        <img
+                            src="{{ item.picture }}"
+                            alt="{{ item.name }}"
+                            class="menu-image"
+                        >
+
+                        <div class="menu-content">
+
+                            <h3>
+                                {{ item.name }}
+                            </h3>
+
+                            <p class="menu-description">
+                                {{ item.description }}
+                            </p>
+
+                            <div class="menu-price">
+                                ₹{{ item.price|floatformat:0 }}
+                            </div>
+
+                            {% if item.vegetarian %}
+
+                                <p class="menu-diet">
+                                    🟢 Vegetarian
+                                </p>
+
+                            {% else %}
+
+                                <p class="menu-diet">
+                                    🔴 Non-vegetarian
+                                </p>
+
+                            {% endif %}
+
+                            <!-- Add to Cart -->
+                            <form
+                                method="POST"
+                                action="{% url 'add_to_cart' item.id %}"
+                            >
+
+                                {% csrf_token %}
+
+                                <button
+                                    type="submit"
+                                    class="btn btn-primary customer-add-cart"
+                                >
+                                    🛒 Add to Cart
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="empty-state">
+
+                <h2>
+                    No menu items available
+                </h2>
+
+                <p>
+                    This restaurant has not added any food items yet.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </main>
+
+</body>
+
+</html>

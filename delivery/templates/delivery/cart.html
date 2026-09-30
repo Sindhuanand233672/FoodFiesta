@@ -1,0 +1,465 @@
+{% comment %} {% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FoodFiesta | Cart</title>
+
+    <link rel="stylesheet"
+          href="{% static 'delivery/style.css' %}">
+
+</head>
+
+<body>
+
+{% include 'delivery/_navbar.html' %}
+
+
+<main class="cart-page">
+
+    <div class="page-heading">
+
+        <div class="eyebrow">
+            YOUR CART
+        </div>
+
+        <h1>
+            My Cart
+        </h1>
+
+        <p>
+            Review your selected food before checkout.
+        </p>
+
+    </div>
+
+
+    {% if cart_items %}
+
+    <div class="cart-layout">
+
+
+        <!-- CART ITEMS -->
+
+        <div class="cart-items">
+
+            {% for cart_item in cart_items %}
+
+            <div class="cart-item-card">
+
+                <img
+                    src="{{ cart_item.item.picture }}"
+                    alt="{{ cart_item.item.name }}"
+                    class="cart-item-image"
+                >
+
+
+                <div class="cart-item-details">
+
+                    <div class="cart-item-top">
+
+                        <div>
+
+                            <h3>
+                                {{ cart_item.item.name }}
+                            </h3>
+
+                            <p class="cart-restaurant">
+                                {{ cart_item.item.restaurant.name }}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <p class="cart-quantity">
+
+                        Quantity:
+                        <strong>
+                            {{ cart_item.quantity }}
+                        </strong>
+
+                    </p>
+
+
+                    <div class="cart-item-bottom">
+
+                        <div class="menu-price">
+                            ₹{{ cart_item.total_price|floatformat:0 }}
+                        </div>
+
+
+                        <form
+                            method="POST"
+                            action="{% url 'remove_from_cart' cart_item.id %}"
+                        >
+
+                            {% csrf_token %}
+
+                            <button
+                                type="submit"
+                                class="btn btn-danger"
+                            >
+                                Remove
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- ORDER SUMMARY -->
+
+        <aside class="cart-summary">
+
+            <div class="eyebrow">
+                ORDER SUMMARY
+            </div>
+
+            <h2>
+                Your order
+            </h2>
+
+            <div class="cart-summary-row">
+
+                <span>
+                    Subtotal
+                </span>
+
+                <strong>
+                    ₹{{ cart_total|floatformat:0 }}
+                </strong>
+
+            </div>
+
+
+            <div class="cart-summary-row">
+
+                <span>
+                    Delivery
+                </span>
+
+                <strong>
+                    Free
+                </strong>
+
+            </div>
+
+
+            <div class="cart-summary-divider"></div>
+
+
+            <div class="cart-total-row">
+
+                <span>
+                    Total
+                </span>
+
+                <strong>
+                    ₹{{ cart_total|floatformat:0 }}
+                </strong>
+
+            </div>
+
+
+            <form
+                method="POST"
+                action="{% url 'checkout' %}"
+            >
+
+                {% csrf_token %}
+
+                <button
+                    type="submit"
+                    class="btn btn-primary checkout-button"
+                >
+                    Proceed to Checkout
+                </button>
+
+            </form>
+
+
+            <a
+                href="{% url 'open_customer_menu' %}"
+                class="continue-shopping"
+            >
+                ← Continue shopping
+            </a>
+
+        </aside>
+
+    </div>
+
+
+    {% else %}
+
+    <div class="empty-state">
+
+        <h2>
+            Your cart is empty
+        </h2>
+
+        <p>
+            Add some delicious food to get started.
+        </p>
+
+        <br>
+
+        <a
+            href="{% url 'open_customer_menu' %}"
+            class="btn btn-primary"
+        >
+            Explore food
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</main>
+
+
+</body>
+</html> {% endcomment %}
+
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FoodFiesta | Cart</title>
+
+    <link rel="stylesheet"
+          href="{% static 'delivery/style.css' %}">
+
+</head>
+
+<body>
+
+{% include 'delivery/_navbar.html' %}
+
+
+<main class="cart-page">
+
+    <div class="page-heading">
+
+        <div class="eyebrow">
+            YOUR CART
+        </div>
+
+        <h1>
+            My Cart
+        </h1>
+
+        <p>
+            Review your selected food before checkout.
+        </p>
+
+    </div>
+
+
+    {% if cart_items %}
+
+    <div class="cart-layout">
+
+
+        <div class="cart-items">
+
+            {% for cart_item in cart_items %}
+
+            <div class="cart-item-card">
+
+                <img
+                    src="{{ cart_item.item.picture }}"
+                    alt="{{ cart_item.item.name }}"
+                    class="cart-item-image"
+                >
+
+
+                <div class="cart-item-details">
+
+                    <h3>
+                        {{ cart_item.item.name }}
+                    </h3>
+
+                    <p class="cart-restaurant">
+                        {{ cart_item.item.restaurant.name }}
+                    </p>
+
+                    <p class="cart-quantity">
+                        Quantity:
+                        <strong>
+                            {{ cart_item.quantity }}
+                        </strong>
+                    </p>
+
+
+                    <div class="cart-item-bottom">
+
+                        <div class="menu-price">
+                            ₹{{ cart_item.total_price|floatformat:0 }}
+                        </div>
+
+
+                        <form
+                            method="POST"
+                            action="{% url 'remove_from_cart' cart_item.id %}"
+                        >
+
+                            {% csrf_token %}
+
+                            <button
+                                type="submit"
+                                class="btn btn-danger"
+                            >
+                                Remove
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <aside class="cart-summary">
+
+            <div class="eyebrow">
+                ORDER SUMMARY
+            </div>
+
+            <h2>
+                Your order
+            </h2>
+
+
+            <div class="cart-summary-row">
+
+                <span>
+                    Subtotal
+                </span>
+
+                <strong>
+                    ₹{{ cart_total|floatformat:0 }}
+                </strong>
+
+            </div>
+
+
+            <div class="cart-summary-row">
+
+                <span>
+                    Delivery
+                </span>
+
+                <strong>
+                    Free
+                </strong>
+
+            </div>
+
+
+            <div class="cart-summary-divider"></div>
+
+
+            <div class="cart-total-row">
+
+                <span>
+                    Total
+                </span>
+
+                <strong>
+                    ₹{{ cart_total|floatformat:0 }}
+                </strong>
+
+            </div>
+
+
+            <form
+                method="POST"
+                action="{% url 'checkout' %}"
+            >
+
+                {% csrf_token %}
+
+                <button
+                    type="submit"
+                    class="btn btn-primary checkout-button"
+                >
+                    Proceed to Checkout
+                </button>
+
+            </form>
+
+
+            <a
+                href="{% url 'open_customer_menu' %}"
+                class="continue-shopping"
+            >
+                ← Continue shopping
+            </a>
+
+        </aside>
+
+    </div>
+
+
+    {% else %}
+
+    <div class="empty-state">
+
+        <h2>
+            Your cart is empty
+        </h2>
+
+        <p>
+            Add some delicious food to get started.
+        </p>
+
+        <br>
+
+        <a
+            href="{% url 'open_customer_menu' %}"
+            class="btn btn-primary"
+        >
+            Explore food
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</main>
+
+</body>
+</html>

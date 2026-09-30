@@ -1,0 +1,121 @@
+
+{% load static %}
+
+<nav class="navbar">
+
+
+    <div class="navbar-inner">
+        
+        <!-- LOGO -->
+
+        <a
+            href="{% url 'index' %}"
+            class="navbar-brand"
+        >
+
+            <span class="brand-icon">
+                🍴
+            </span>
+
+            FoodFiesta
+
+        </a>
+
+
+        <!-- NAV LINKS -->
+
+<div class="navbar-links">
+
+    <a href="{% url 'index' %}">
+        Home
+    </a>
+
+    <a href="{% url 'open_show_restaurant' %}">
+        Restaurants
+    </a>
+
+    <a href="{% url 'smart_leftover_companion' %}">
+        Smart Kitchen
+    </a>
+
+    <a href="{% url 'about' %}">
+        About
+    </a>
+
+</div>
+
+
+        <!-- RIGHT SIDE -->
+
+        <div class="navbar-actions">
+
+
+            {% if request.session.role == 'customer' %}
+
+                <a
+                    href="{% url 'open_cart' %}"
+                    class="nav-login"
+                >
+                    Cart
+                </a>
+
+
+                <a
+                    href="{% url 'open_orders' %}"
+                    class="nav-login"
+                >
+                    My Orders
+                </a>
+
+
+                <a
+                    href="{% url 'logout' %}"
+                    class="nav-button"
+                >
+                    Logout
+                </a>
+
+
+            {% elif request.session.role == 'admin' %}
+            
+
+    <a
+        href="{% url 'admin_orders' %}"
+        class="nav-login"
+    >
+        📦 My Orders
+    </a>
+
+    <a
+        href="{% url 'logout' %}"
+        class="nav-button"
+    >
+        Logout
+    </a>
+            
+
+
+            {% else %}
+
+                <a
+                    href="{% url 'open_signin' %}"
+                    class="nav-login"
+                >
+                    Sign in
+                </a>
+
+
+                <a
+                    href="{% url 'open_signup' %}"
+                    class="nav-button"
+                >
+                    Get started
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</nav>

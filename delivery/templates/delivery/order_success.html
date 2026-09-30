@@ -1,0 +1,329 @@
+{% comment %} {% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FoodFiesta | Order Confirmed</title>
+
+    <link rel="stylesheet"
+          href="{% static 'delivery/style.css' %}">
+
+</head>
+
+<body>
+
+{% include 'delivery/_navbar.html' %}
+
+
+<main class="order-success-page">
+
+    <div class="order-success-card">
+
+        <div class="order-success-icon">
+            ✓
+        </div>
+
+        <div class="eyebrow">
+            ORDER CONFIRMED
+        </div>
+
+        <h1>
+            Your order is placed!
+        </h1>
+
+        <p>
+            Thank you for ordering with FoodFiesta.
+            Your food order has been created successfully.
+        </p>
+
+        <div class="order-number">
+
+            Order #
+            <strong>
+                {{ order.id }}
+            </strong>
+
+        </div>
+
+        <div class="order-success-details">
+
+            <div>
+
+                <span>
+                    Total amount
+                </span>
+
+                <strong>
+                    ₹{{ order.total_amount|floatformat:0 }}
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Status
+                </span>
+
+                <strong>
+                    {{ order.status }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="order-success-actions">
+
+            <a
+                href="{% url 'open_customer_menu' %}"
+                class="btn btn-primary"
+            >
+                Continue shopping
+            </a>
+
+
+            <a
+                href="{% url 'index' %}"
+                class="btn btn-secondary"
+            >
+                Back to home
+            </a>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+</body>
+</html> {% endcomment %}
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FoodFiesta | Order Confirmed</title>
+
+    <link rel="stylesheet"
+          href="{% static 'delivery/style.css' %}">
+
+    <style>
+
+        .order-success-page {
+            min-height: calc(100vh - 75px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 20px;
+            background: #f8f6f0;
+        }
+
+        .order-success-card {
+            width: 100%;
+            max-width: 620px;
+            padding: 48px;
+            text-align: center;
+            background: white;
+            border: 1px solid #e5dfd2;
+            border-radius: 24px;
+            box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+        }
+
+        .order-success-icon {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e8f1ec;
+            color: #245542;
+            font-size: 34px;
+            font-weight: 800;
+        }
+
+        .order-success-card h1 {
+            margin: 10px 0;
+            color: #245542;
+        }
+
+        .order-success-card p {
+            color: #6b766f;
+            line-height: 1.7;
+        }
+
+        .order-number {
+            margin: 25px 0;
+            padding: 15px;
+            border-radius: 12px;
+            background: #f8f6f0;
+            color: #6b766f;
+        }
+
+        .order-number strong {
+            color: #245542;
+        }
+
+        .order-success-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .order-success-details div {
+            padding: 18px;
+            background: #f8f6f0;
+            border-radius: 12px;
+        }
+
+        .order-success-details span {
+            display: block;
+            color: #6b766f;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .order-success-details strong {
+            color: #245542;
+            font-size: 18px;
+        }
+
+        .order-success-actions {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 600px) {
+
+            .order-success-card {
+                padding: 30px 20px;
+            }
+
+            .order-success-details {
+                grid-template-columns: 1fr;
+            }
+
+            .order-success-actions {
+                flex-direction: column;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+{% include 'delivery/_navbar.html' %}
+
+
+<main class="order-success-page">
+
+    <div class="order-success-card">
+
+        <div class="order-success-icon">
+            ✓
+        </div>
+
+        <div class="eyebrow">
+            ORDER CONFIRMED
+        </div>
+
+        <h1>
+            Your order is placed!
+        </h1>
+
+        <p>
+            Thank you for ordering with FoodFiesta.
+            Your order has been created successfully.
+        </p>
+
+
+        <div class="order-number">
+
+            Order #
+            <strong>
+                {{ order.id }}
+            </strong>
+
+        </div>
+
+
+        <div class="order-success-details">
+
+            <div>
+
+                <span>
+                    Total amount
+                </span>
+
+                <strong>
+                    ₹{{ order.total_amount|floatformat:0 }}
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Status
+                </span>
+
+                <strong>
+                    {{ order.status }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="order-success-actions">
+
+            <a
+                href="{% url 'open_customer_menu' %}"
+                class="btn btn-primary"
+            >
+                Continue shopping
+            </a>
+
+
+            <a
+                href="{% url 'open_orders' %}"
+                class="btn btn-secondary"
+            >
+                My orders
+            </a>
+
+        </div>
+
+    </div>
+
+</main>
+
+</body>
+</html>

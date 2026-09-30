@@ -1,0 +1,827 @@
+{% comment %} {% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>FoodFiesta | Home</title>
+
+    <link rel="stylesheet"
+        href="{% static 'delivery/style.css' %}">
+
+</head>
+
+<body>
+
+<div class="customer-layout">
+
+
+    <!-- ==============================
+         SIDEBAR
+         ============================== -->
+
+    <aside class="customer-sidebar">
+
+        <a href="{% url 'index' %}"
+           class="customer-logo">
+
+            <span class="customer-logo-icon">
+                🍴
+            </span>
+
+            <span>
+                FoodFiesta
+            </span>
+
+        </a>
+
+
+        <nav class="customer-side-nav">
+
+            <a href="{% url 'index' %}"
+               class="customer-side-link active">
+
+                <span>⌂</span>
+                <span>Home</span>
+
+            </a>
+
+
+            <a href="{% url 'open_show_restaurant' %}"
+               class="customer-side-link">
+
+                <span>▣</span>
+                <span>Restaurants</span>
+
+            </a>
+
+
+            <a href="{% url 'open_customer_menu' %}"
+               class="customer-side-link">
+
+                <span>☷</span>
+                <span>Explore Menu</span>
+
+            </a>
+
+
+            <a href="#categories"
+               class="customer-side-link">
+
+                <span>◈</span>
+                <span>Categories</span>
+
+            </a>
+            <a href="{% url 'open_cart' %}"
+class="customer-side-link">
+
+    <span>🛒</span>
+    <span>Cart</span>
+
+</a>
+        </nav>
+
+
+        <div class="customer-sidebar-bottom">
+
+            <div class="customer-food-note">
+                <div class="customer-food-note-icon">
+                    🍲
+                </div>
+
+                <strong>
+                    Good Food
+                </strong>
+
+                <span>
+                    Happy Moments
+                </span>
+            </div>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- ==============================
+         MAIN CONTENT
+         ============================== -->
+
+    <main class="customer-main">
+
+
+        <!-- TOP BAR -->
+
+        <header class="customer-topbar">
+
+            <div>
+
+                <span class="customer-location-label">
+                    FOODFIESTA
+                </span>
+
+                <h3>
+                    Welcome back!
+                </h3>
+
+            </div>
+
+
+            <div class="customer-profile">
+
+                <div class="customer-avatar">
+                    C
+                </div>
+
+                <span>
+                    Customer
+                </span>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- HERO -->
+
+        <section class="customer-hero">
+
+            <div class="customer-hero-overlay"></div>
+
+            <div class="customer-hero-content">
+
+                <div class="eyebrow">
+                    GOOD FOOD · GOOD MOOD
+                </div>
+
+                <h1>
+                    Craving something
+                    <span>delicious?</span>
+                </h1>
+
+                <p>
+                    Discover restaurants, explore menus
+                    and find food you love.
+                </p>
+
+
+                <form
+                    action="{% url 'open_show_restaurant' %}"
+                    method="GET"
+                    class="customer-search"
+                >
+
+                    <span class="search-icon">
+                        🔍
+                    </span>
+
+                    <input
+                        type="text"
+                        name="q"
+                        placeholder="Search restaurants..."
+                    >
+
+                    <button type="submit">
+                        Search
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- CATEGORIES -->
+
+        <section
+            id="categories"
+            class="customer-section"
+        >
+
+            <div class="customer-section-heading">
+
+                <div>
+
+                    <div class="eyebrow">
+                        EXPLORE
+                    </div>
+
+                    <h2>
+                        Popular Categories
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="customer-category-grid">
+
+                <a href="{% url 'open_customer_menu' %}"
+                   class="customer-category-card">
+
+                    <div class="category-icon">
+                        🍕
+                    </div>
+
+                    <span>
+                        Pizza
+                    </span>
+
+                </a>
+
+
+                <a href="{% url 'open_customer_menu' %}"
+                   class="customer-category-card">
+
+                    <div class="category-icon">
+                        🍔
+                    </div>
+
+                    <span>
+                        Burgers
+                    </span>
+
+                </a>
+
+
+                <a href="{% url 'open_customer_menu' %}"
+                   class="customer-category-card">
+
+                    <div class="category-icon">
+                        🍛
+                    </div>
+
+                    <span>
+                        Indian
+                    </span>
+
+                </a>
+
+
+                <a href="{% url 'open_customer_menu' %}"
+                   class="customer-category-card">
+
+                    <div class="category-icon">
+                        🥢
+                    </div>
+
+                    <span>
+                        Chinese
+                    </span>
+
+                </a>
+
+
+                <a href="{% url 'open_customer_menu' %}"
+                   class="customer-category-card">
+
+                    <div class="category-icon">
+                        ☕
+                    </div>
+
+                    <span>
+                        Beverages
+                    </span>
+
+                </a>
+
+
+                <a href="{% url 'open_customer_menu' %}"
+                   class="customer-category-card">
+
+                    <div class="category-icon">
+                        🍰
+                    </div>
+
+                    <span>
+                        Desserts
+                    </span>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- RESTAURANTS -->
+
+        <section class="customer-section">
+
+            <div class="customer-section-heading">
+
+                <div>
+
+                    <div class="eyebrow">
+                        FOODFIESTA
+                    </div>
+
+                    <h2>
+                        Popular Restaurants
+                    </h2>
+
+                    <p>
+                        Discover restaurants available on FoodFiesta.
+                    </p>
+
+                </div>
+
+
+                <a href="{% url 'open_show_restaurant' %}"
+                   class="customer-view-all">
+
+                    View all →
+
+                </a>
+
+            </div>
+
+
+
+            {% if restaurantList %}
+
+            <div class="customer-restaurant-grid">
+
+                {% for restaurant in restaurantList|slice:":6" %}
+
+                <article class="customer-restaurant-card">
+
+                    <img
+                        src="{{ restaurant.picture }}"
+                        alt="{{ restaurant.name }}"
+                        class="customer-restaurant-image"
+                    >
+
+
+                    <div class="customer-restaurant-body">
+
+                        <div class="customer-restaurant-top">
+
+                            <h3>
+                                {{ restaurant.name }}
+                            </h3>
+
+                            <span class="customer-rating">
+                                ★ {{ restaurant.rating }}
+                            </span>
+
+                        </div>
+
+
+                        <p class="customer-cuisine">
+                            {{ restaurant.cuisine }}
+                        </p>
+
+
+                        <a
+                            href="{% url 'open_update_menu' restaurant.id %}"
+                            class="customer-menu-button"
+                        >
+                            View menu
+                        </a>
+
+                    </div>
+
+                </article>
+
+                {% endfor %}
+
+            </div>
+
+            {% else %}
+
+            <div class="customer-empty-state">
+
+                <h3>
+                    No restaurants yet
+                </h3>
+
+                <p>
+                    Restaurants will appear here once they are added.
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </section>
+
+
+    </main>
+
+</div>
+
+</body>
+
+</html> {% endcomment %}
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FoodFiesta | Home</title>
+
+    <link rel="stylesheet"
+          href="{% static 'delivery/style.css' %}">
+
+</head>
+
+<body>
+
+<div class="customer-layout">
+
+    <aside class="customer-sidebar">
+
+        <a href="{% url 'index' %}"
+           class="customer-logo">
+
+            <span class="customer-logo-icon">
+                🍴
+            </span>
+
+            <span>FoodFiesta</span>
+
+        </a>
+
+
+        <nav class="customer-side-nav">
+
+            <a href="{% url 'index' %}"
+               class="customer-side-link active">
+
+                <span>⌂</span>
+                <span>Home</span>
+
+            </a>
+
+
+            <a href="{% url 'open_show_restaurant' %}"
+               class="customer-side-link">
+
+                <span>▣</span>
+                <span>Restaurants</span>
+
+            </a>
+
+
+            <a href="{% url 'open_customer_menu' %}"
+               class="customer-side-link">
+
+                <span>☷</span>
+                <span>Explore Menu</span>
+
+            </a>
+            <a href="{% url 'smart_leftover_companion' %}"
+                class="customer-side-link">
+                <span>♻️</span>
+                <span>Smart Leftovers</span>
+            </a>
+
+
+            <a href="{% url 'open_cart' %}"
+               class="customer-side-link">
+
+                <span>🛒</span>
+                <span>Cart</span>
+
+            </a>
+
+
+            <a href="{% url 'open_orders' %}"
+               class="customer-side-link">
+
+                <span>◷</span>
+                <span>My Orders</span>
+
+            </a>
+
+
+            <a href="#categories"
+               class="customer-side-link">
+
+                <span>◈</span>
+                <span>Categories</span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="customer-sidebar-bottom">
+
+            <div class="customer-food-note">
+
+                <div class="customer-food-note-icon">
+                    🍲
+                </div>
+
+                <strong>
+                    Good Food
+                </strong>
+
+                <span>
+                    Happy Moments
+                </span>
+
+            </div>
+
+
+            <a
+                href="{% url 'logout' %}"
+                class="customer-side-link"
+                style="margin-top:12px;"
+            >
+                <span>↪</span>
+                <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <main class="customer-main">
+
+        <header class="customer-topbar">
+
+            <div>
+
+                <span class="customer-location-label">
+                    FOODFIESTA
+                </span>
+
+                <h3>
+                    Welcome, {{ username }}!
+                </h3>
+
+            </div>
+
+
+            <div class="customer-profile">
+
+                <div class="customer-avatar">
+                    {{ username|first|upper }}
+                </div>
+                <span>
+                    {{ username }}
+                </span>
+
+            </div>
+
+        </header>
+
+
+        <section class="customer-hero">
+
+            <div class="customer-hero-content">
+
+                <div class="eyebrow">
+                    GOOD FOOD · GOOD MOOD
+                </div>
+
+                <h1>
+                    Craving something
+                    <span>delicious?</span>
+                </h1>
+
+                <p>
+                    Discover restaurants, explore menus
+                    and find food you love.
+                </p>
+
+
+                <form
+                    action="{% url 'open_show_restaurant' %}"
+                    method="GET"
+                    class="customer-search"
+                >
+
+                    <span class="search-icon">
+                        🔍
+                    </span>
+
+                    <input
+                        type="text"
+                        name="q"
+                        placeholder="Search restaurants..."
+                    >
+
+                    <button type="submit">
+                        Search
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+        <section
+            id="categories"
+            class="customer-section"
+        >
+
+            <div class="customer-section-heading">
+
+                <div>
+
+                    <div class="eyebrow">
+                        EXPLORE
+                    </div>
+
+                    <h2>
+                        Popular Categories
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="customer-category-grid">
+
+                <a
+                    href="{% url 'open_customer_menu' %}?category=Pizza"
+                    class="customer-category-card"
+                >
+                    <div class="category-icon">🍕</div>
+                    <span>Pizza</span>
+                </a>
+
+
+                <a
+                    href="{% url 'open_customer_menu' %}?category=Burgers"
+                    class="customer-category-card"
+                >
+                    <div class="category-icon">🍔</div>
+                    <span>Burgers</span>
+                </a>
+
+
+                <a
+                    href="{% url 'open_customer_menu' %}?category=Indian"
+                    class="customer-category-card"
+                >
+                    <div class="category-icon">🍛</div>
+                    <span>Indian</span>
+                </a>
+
+
+                <a
+                    href="{% url 'open_customer_menu' %}?category=Chinese"
+                    class="customer-category-card"
+                >
+                    <div class="category-icon">🥢</div>
+                    <span>Chinese</span>
+                </a>
+
+
+                <a
+                    href="{% url 'open_customer_menu' %}?category=Beverages"
+                    class="customer-category-card"
+                >
+                    <div class="category-icon">☕</div>
+                    <span>Beverages</span>
+                </a>
+
+
+                <a
+                    href="{% url 'open_customer_menu' %}?category=Desserts"
+                    class="customer-category-card"
+                >
+                    <div class="category-icon">🍰</div>
+                    <span>Desserts</span>
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <section class="customer-section">
+
+            <div class="customer-section-heading">
+
+                <div>
+
+                    <div class="eyebrow">
+                        FOODFIESTA
+                    </div>
+
+                    <h2>
+                        Popular Restaurants
+                    </h2>
+
+                    <p>
+                        Discover restaurants available on FoodFiesta.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="{% url 'open_show_restaurant' %}"
+                    class="customer-view-all"
+                >
+                    View all →
+                </a>
+
+            </div>
+
+
+            {% if restaurantList %}
+
+            <div class="customer-restaurant-grid">
+
+                {% for restaurant in restaurantList|slice:":6" %}
+
+                <article class="customer-restaurant-card">
+
+                    <img
+                        src="{{ restaurant.picture }}"
+                        alt="{{ restaurant.name }}"
+                        class="customer-restaurant-image"
+                    >
+
+
+                    <div class="customer-restaurant-body">
+
+                        <div class="customer-restaurant-top">
+
+                            <h3>
+                                {{ restaurant.name }}
+                            </h3>
+
+                            <span class="customer-rating">
+                                ★ {{ restaurant.rating|floatformat:1 }}/5
+                            
+                            </span>
+
+                        </div>
+
+
+                        <p class="customer-cuisine">
+                            {{ restaurant.cuisine }}
+                        </p>
+
+
+                        <a
+                            href="{% url 'open_customer_restaurant_menu' restaurant.id %}"
+                            class="customer-menu-button"
+                        >
+                            View menu
+                        </a>
+
+                    </div>
+
+                </article>
+
+                {% endfor %}
+
+            </div>
+
+            {% else %}
+
+            <div class="customer-empty-state">
+
+                <h3>
+                    No restaurants yet
+                </h3>
+
+                <p>
+                    Restaurants will appear here once the admin adds them.
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

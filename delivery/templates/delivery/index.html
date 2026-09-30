@@ -1,0 +1,142 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>FoodFiesta | Good Food, Delivered</title>
+
+    <link rel="stylesheet"
+        href="{% static 'delivery/style.css' %}">
+
+</head>
+
+<body>
+
+{% include 'delivery/_navbar.html' %}
+
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="eyebrow">
+            FOOD DELIVERY, SIMPLIFIED
+        </div>
+
+        <h1>
+            Good food.<br>
+            Better moments.
+        </h1>
+
+        <p>
+            Discover restaurants around you, explore their menus,
+            and get your favourite meals delivered without the hassle.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="{% url 'open_show_restaurant' %}"
+               class="btn btn-primary">
+
+                Explore restaurants →
+
+            </a>
+
+            <a href="{% url 'open_signup' %}"
+               class="btn btn-light">
+
+                Create account
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="feature-section" id="about">
+
+    <div class="page-heading"
+         style="width:min(1180px,90%);margin:0 auto 30px;">
+
+        <div class="eyebrow">
+            WHY FOODFIESTA
+        </div>
+
+        <h1>
+            Everything you need to order better.
+        </h1>
+
+        <p>
+            Simple discovery, easy menu browsing and a smooth ordering experience.
+        </p>
+
+    </div>
+
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+
+            <div class="feature-icon">⌕</div>
+
+            <h3>Discover</h3>
+
+            <p>
+                Find restaurants and cuisines that match
+                exactly what you are craving.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">☷</div>
+
+            <h3>Choose</h3>
+
+            <p>
+                Browse menus, compare dishes and build
+                your perfect meal.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">✓</div>
+
+            <h3>Enjoy</h3>
+
+            <p>
+                Place your order and keep track of it
+                from checkout to delivery.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer class="footer">
+
+    © 2026 FoodFiesta · Good food, made simple.
+
+</footer>
+
+
+</body>
+</html>

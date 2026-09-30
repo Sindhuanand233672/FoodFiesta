@@ -1,0 +1,128 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Menu Item | FoodFiesta</title>
+
+    <link rel="stylesheet"
+          href="{% static 'delivery/style.css' %}">
+</head>
+
+<body>
+
+{% include 'delivery/_navbar.html' %}
+
+<main class="form-page">
+
+    <div class="form-card">
+
+        <div class="eyebrow">
+            MENU MANAGEMENT
+        </div>
+
+        <h1>Edit menu item</h1>
+
+        <p class="form-subtitle">
+            Update the details of {{ item.name }}.
+        </p>
+
+        <form
+            action="{% url 'edit_menu_item' item.id %}"
+            method="post"
+        >
+
+            {% csrf_token %}
+
+            <div class="form-group">
+
+                <label>Item Name</label>
+
+                <input
+                    type="text"
+                    name="name"
+                    value="{{ item.name }}"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Description</label>
+
+                <textarea
+                    name="description"
+                    required
+                >{{ item.description }}</textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Price</label>
+
+                <input
+                    type="number"
+                    name="price"
+                    value="{{ item.price }}"
+                    min="1"
+                    step="0.01"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+
+                    <input
+                        type="checkbox"
+                        name="vegetarian"
+                        {% if item.vegetarian %}checked{% endif %}
+                    >
+
+                    Vegetarian
+
+                </label>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Image URL</label>
+
+                <input
+                    type="url"
+                    name="picture"
+                    value="{{ item.picture }}"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn btn-primary form-submit"
+            >
+                Save Changes
+            </button>
+
+        </form>
+
+    </div>
+
+</main>
+
+</body>
+</html>

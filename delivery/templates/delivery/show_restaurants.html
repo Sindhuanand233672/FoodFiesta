@@ -1,0 +1,169 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FoodFiesta | Restaurants</title>
+
+    <link rel="stylesheet"
+          href="{% static 'delivery/style.css' %}">
+
+</head>
+
+<body>
+
+{% include 'delivery/_navbar.html' %}
+
+
+<main class="restaurant-section">
+
+    <div class="page-heading">
+
+        <div class="eyebrow">
+            FOODFIESTA DISCOVERY
+        </div>
+
+        <h1>
+            {% if search_query %}
+                Search results
+            {% else %}
+                Restaurants
+            {% endif %}
+        </h1>
+
+        <p>
+
+            {% if search_query %}
+
+                Showing restaurants matching
+                "<strong>{{ search_query }}</strong>"
+
+            {% else %}
+
+                Explore restaurants and discover great food.
+
+            {% endif %}
+
+        </p>
+
+    </div>
+
+
+    {% if restaurantList %}
+
+    <div class="restaurant-grid">
+
+        {% for restaurant in restaurantList %}
+
+        <div class="restaurant-card">
+
+            <img
+                src="{{ restaurant.picture }}"
+                alt="{{ restaurant.name }}"
+                class="restaurant-image"
+            >
+
+
+            <div class="restaurant-content">
+
+                <div class="customer-restaurant-top">
+
+                    <h3>
+                        {{ restaurant.name }}
+                    </h3>
+
+                    <span class="customer-rating">
+                        ★ {{ restaurant.rating }}
+                    </span>
+
+                </div>
+
+
+                <div class="restaurant-meta">
+
+                    <span>
+                        {{ restaurant.cuisine }}
+                    </span>
+
+                </div>
+
+
+                {% if role == 'admin' %}
+
+                <div class="restaurant-actions">
+
+                    <a
+                        href="{% url 'open_update_restaurant' restaurant.id %}"
+                        class="btn btn-secondary"
+                    >
+                        Edit
+                    </a>
+
+
+                    <a
+                        href="{% url 'delete_restaurant' restaurant.id %}"
+                        class="btn btn-danger"
+                    >
+                        Delete
+                    </a>
+
+
+                    <a
+                        href="{% url 'open_update_menu' restaurant.id %}"
+                        class="btn btn-primary"
+                    >
+                        Manage Menu
+                    </a>
+
+                </div>
+
+                {% else %}
+
+                <div class="restaurant-actions">
+
+                    <a
+                        href="{% url 'open_customer_restaurant_menu' restaurant.id %}"
+                        class="btn btn-primary"
+                    >
+                        View Menu
+                    </a>
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="empty-state">
+
+        <h2>
+            No restaurants found
+        </h2>
+
+        <p>
+            Try another restaurant name or cuisine.
+        </p>
+
+    </div>
+
+    {% endif %}
+
+</main>
+
+</body>
+</html>

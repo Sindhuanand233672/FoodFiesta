@@ -1,0 +1,172 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>FoodFiesta | Manage Orders</title>
+
+    <link rel="stylesheet"
+        href="{% static 'delivery/style.css' %}">
+</head>
+
+<body>
+
+{% include 'delivery/_navbar.html' %}
+
+<main class="admin-orders-page">
+
+    <div class="admin-orders-header">
+
+        <div class="eyebrow">
+            ADMIN DASHBOARD
+        </div>
+
+        <h1>Manage Orders</h1>
+
+        <p>
+            View customer orders and update their delivery status.
+        </p>
+
+    </div>
+
+
+    {% if orders %}
+
+        <div class="admin-orders-grid">
+
+            {% for order in orders %}
+
+                <article class="admin-order-card">
+
+                    <div class="admin-order-top">
+
+                        <div>
+                            <span class="eyebrow">
+                                ORDER #{{ order.id }}
+                            </span>
+
+                            <h2>
+                                {{ order.customer.username }}
+                            </h2>
+                        </div>
+
+                        <span class="admin-order-status">
+                            {{ order.status }}
+                        </span>
+
+                    </div>
+
+
+                    <p class="admin-order-date">
+                        {{ order.created_at|date:"d M Y, h:i A" }}
+                    </p>
+
+
+                    <div class="admin-order-items">
+
+                        <h3>Order Items</h3>
+
+                        {% for order_item in order.orderitem_set.all %}
+
+                            <div class="admin-order-item">
+
+                                <span>
+                                    {{ order_item.item.name }}
+                                    × {{ order_item.quantity }}
+                                </span>
+
+                                <strong>
+                                    ₹{{ order_item.price|floatformat:0 }}
+                                </strong>
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    <div class="admin-order-total">
+
+                        <span>Total Amount</span>
+
+                        <strong>
+                            ₹{{ order.total_amount|floatformat:0 }}
+                        </strong>
+
+                    </div>
+
+
+                    <form
+                        method="POST"
+                        action="{% url 'update_order_status' order.id %}"
+                        class="admin-status-form"
+                    >
+
+                        {% csrf_token %}
+
+                        <label for="status-{{ order.id }}">
+                            Update Order Status
+                        </label>
+
+                        <select
+                            name="status"
+                            id="status-{{ order.id }}"
+                            class="admin-status-select"
+                        >
+
+                            {% for status in status_choices %}
+
+                                <option
+                                    value="{{ status }}"
+                                    {% if order.status == status %}
+                                        selected
+                                    {% endif %}
+                                >
+                                    {{ status }}
+                                </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                        <button
+                            type="submit"
+                            class="admin-status-button"
+                        >
+                            Update Status
+                        </button>
+
+                    </form>
+
+                </article>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="empty-state">
+
+            <h2>No orders yet</h2>
+
+            <p>
+                Customer orders will appear here.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</main>
+
+</body>
+</html>

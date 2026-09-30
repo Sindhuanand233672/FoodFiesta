@@ -1,0 +1,108 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FoodFiesta | Sign In</title>
+
+    <link rel="stylesheet"
+          href="{% static 'delivery/style.css' %}">
+
+</head>
+
+<body>
+
+{% include 'delivery/_navbar.html' %}
+
+
+<main class="form-page">
+
+    <div class="form-card">
+
+        <div class="eyebrow">
+            WELCOME BACK
+        </div>
+
+        <h1>
+            Sign in to FoodFiesta
+        </h1>
+
+        <p class="form-subtitle">
+            Sign in to explore restaurants and enjoy great food.
+        </p>
+
+
+        <form method="POST" action="{% url 'signin' %}">
+    {% csrf_token %}
+
+
+            <div class="form-group">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Enter your username"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn btn-primary form-submit"
+            >
+                Sign In
+            </button>
+
+        </form>
+
+
+        <div class="form-footer">
+
+            <p>
+                Don't have an account?
+                <a href="{% url 'open_signup' %}">
+                    Create an account
+                </a>
+            </p>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+</body>
+
+</html>

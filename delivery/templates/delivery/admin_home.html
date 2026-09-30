@@ -1,0 +1,251 @@
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+</head>
+
+<body>
+
+    <h3>Welcome to Admin HOME!</h3>
+
+    <a href="{% url 'open_add_restaurant' %}">
+        ADD NEW RESTAURANT
+    </a>
+
+    <br><br>
+
+    <a href="{% url 'open_show_restaurant' %}">
+        SHOW RESTAURANTS
+    </a>
+
+</body>
+</html> {% endcomment %}
+
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>FoodFiesta | Admin</title>
+
+    <link rel="stylesheet"
+        href="{% static 'delivery/style.css' %}">
+
+</head>
+
+<body>
+
+{% include 'delivery/_navbar.html' %}
+
+
+<main class="dashboard">
+
+    <div class="dashboard-header">
+
+    <div>
+
+        <div class="eyebrow">
+            RESTAURANT MANAGEMENT
+        </div>
+
+        <h1>
+            Good to see you, Admin.
+        </h1>
+
+        <p>
+            Manage restaurants, menus and your FoodFiesta network.
+        </p>
+
+    </div>
+
+
+    <div style="display: flex; gap: 12px; align-items: center;">
+
+        <a
+            href="{% url 'open_add_restaurant' %}"
+            class="btn btn-primary"
+        >
+            + Add restaurant
+        </a>
+
+
+        <a
+            href="{% url 'logout' %}"
+            class="btn btn-secondary"
+        >
+            Logout
+        </a>
+
+    </div>
+
+</div>
+
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                Restaurants
+            </div>
+
+            <div class="stat-number">
+                {{ restaurant_count }}
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                Menu Items
+            </div>
+
+            <div class="stat-number">
+                {{ item_count }}
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                Average Rating
+            </div>
+
+            <div class="stat-number">
+                {{ average_rating|default:"0.0" }}
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                Platform
+            </div>
+
+            <div class="stat-number">
+                Live
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+
+            <div class="feature-icon">＋</div>
+
+            <h3>Add Restaurant</h3>
+
+            <p>
+                Add a new restaurant to the FoodFiesta platform.
+            </p>
+
+            <br>
+
+            <a href="{% url 'open_add_restaurant' %}"
+               class="btn btn-primary">
+
+                Add restaurant
+
+            </a>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">⌕</div>
+
+            <h3>Manage Restaurants</h3>
+
+            <p>
+                Update restaurant details, manage menus
+                or remove restaurants.
+            </p>
+
+            <br>
+
+            <a href="{% url 'open_show_restaurant' %}"
+            class="btn btn-secondary">
+
+                View restaurants
+
+            </a>
+
+        </div>
+        <!-- MY ORDERS -->
+<div class="feature-card">
+
+    <div class="feature-icon">📦</div>
+
+    <h3>My Orders</h3>
+
+    <p>
+        View customer orders, check order details,
+        and manage order status.
+    </p>
+
+    <br>
+
+    <a
+        href="{% url 'admin_orders' %}"
+        class="btn btn-primary"
+    >
+        Manage Orders
+    </a>
+
+</div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">☷</div>
+
+            <h3>Menu Management</h3>
+
+            <p>
+                Add, edit and remove dishes from restaurant menus.
+            </p>
+
+            <br>
+
+            <a href="{% url 'open_show_restaurant' %}"
+            class="btn btn-secondary">
+
+                Choose restaurant
+
+            </a>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<footer class="footer">
+    © 2026 FoodFiesta Admin
+</footer>
+
+
+</body>
+</html>

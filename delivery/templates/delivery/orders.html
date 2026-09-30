@@ -1,0 +1,135 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FoodFiesta | My Orders</title>
+
+    <link rel="stylesheet"
+          href="{% static 'delivery/style.css' %}">
+
+</head>
+
+<body>
+
+{% include 'delivery/_navbar.html' %}
+
+
+<main class="restaurant-section">
+
+    <div class="page-heading">
+
+        <div class="eyebrow">
+            ORDER HISTORY
+        </div>
+
+        <h1>
+            My Orders
+        </h1>
+
+        <p>
+            Track your FoodFiesta orders.
+        </p>
+
+    </div>
+
+
+    {% if orders %}
+
+    <div class="orders-grid">
+
+        {% for order in orders %}
+
+        <div class="order-card">
+
+            <div class="order-card-top">
+
+                <div>
+
+                    <span class="eyebrow">
+                        ORDER #{{ order.id }}
+                    </span>
+
+                    <h3>
+                        ₹{{ order.total_amount|floatformat:0 }}
+                    </h3>
+
+                </div>
+
+
+                <span class="order-status">
+                    {{ order.status }}
+                </span>
+
+            </div>
+
+
+            <p class="order-date">
+                {{ order.created_at|date:"d M Y, h:i A" }}
+            </p>
+
+
+            <div class="order-items-preview">
+
+                {% for order_item in order.orderitem_set.all %}
+
+                <div class="order-item-row">
+
+                    <span>
+                        {{ order_item.item.name }}
+                        × {{ order_item.quantity }}
+                    </span>
+
+                    <strong>
+                        ₹{{ order_item.total_price|floatformat:0 }}
+                    </strong>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    {% else %}
+
+    <div class="empty-state">
+
+        <h2>
+            No orders yet
+        </h2>
+
+        <p>
+            Your completed orders will appear here.
+        </p>
+
+        <br>
+
+        <a
+            href="{% url 'open_customer_menu' %}"
+            class="btn btn-primary"
+        >
+            Start ordering
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</main>
+
+</body>
+</html>

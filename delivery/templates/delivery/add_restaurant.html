@@ -1,0 +1,161 @@
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Restaurant</title>
+</head>
+<body>
+    <form method="POST" action="{% url 'add_restaurant' %}">
+    {% csrf_token %}
+        <label>Restaurant name</label>
+        <input type="text" name="name">
+        <br><br>
+
+        <label>Picture url</label>
+        <input type="text" name="picture">
+        <br><br>
+
+        <label>Cuisine</label>
+        <input type="text" name="cuisine">
+        <br><br>
+
+        <label>Rating</label>
+        <input type="number" name="rating" min="0" max="5" step="0.5">
+        <br><br>
+
+        <button type="submit">Add Restaurant</button>
+    </form>
+</body>
+</html> {% endcomment %}
+
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FoodFiesta | Add Restaurant</title>
+
+    <link rel="stylesheet"
+        href="{% static 'delivery/style.css' %}">
+
+</head>
+
+<body>
+
+{% include 'delivery/_navbar.html' %}
+
+
+<main class="form-page">
+
+    <div class="form-card">
+
+        <div class="eyebrow">
+            RESTAURANT MANAGEMENT
+        </div>
+
+        <h1>Add restaurant</h1>
+
+        <p class="form-subtitle">
+            Add a restaurant to your FoodFiesta network.
+        </p>
+
+
+        <form
+            action="{% url 'add_restaurant' %}"
+            method="post"
+        >
+
+            {% csrf_token %}
+
+
+            <div class="form-group">
+
+                <label>
+                    Restaurant name
+                </label>
+
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="e.g. Domino's"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Picture URL
+                </label>
+
+                <input
+                    type="url"
+                    name="picture"
+                    placeholder="https://..."
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Cuisine
+                </label>
+
+                <input
+                    type="text"
+                    name="cuisine"
+                    placeholder="e.g. Pizza, Indian, Chinese"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Rating
+                </label>
+
+                <input
+                    type="number"
+                    name="rating"
+                    min="0"
+                    max="5"
+                    step="0.1"
+                    placeholder="4.5"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn btn-primary form-submit"
+            >
+                Add Restaurant
+            </button>
+
+        </form>
+
+    </div>
+
+</main>
+
+</body>
+</html>
