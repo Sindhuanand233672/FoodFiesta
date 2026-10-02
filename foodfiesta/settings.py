@@ -160,10 +160,12 @@ load_dotenv(BASE_DIR / ".env", override=True)
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
+
 ALLOWED_HOSTS = [
-    "foodfiesta-4m02.onrender.com",
+    "sinusindhu.pythonanywhere.com",
     "localhost",
     "127.0.0.1",
+    "foodfiesta-4m02.onrender.com",
 ]
 
 
